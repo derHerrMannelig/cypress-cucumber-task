@@ -44,3 +44,11 @@ Feature: Login
       | problem     |
     Then I should be redirected into inventory page
     And I should take a screenshot
+
+  Scenario: Performance glitch login
+
+    When I login with credentials
+      | credentials |
+      | glitch      |
+    Then I should be redirected into inventory page
+    And I should record time taken to login

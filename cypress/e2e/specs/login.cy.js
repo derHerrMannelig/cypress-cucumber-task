@@ -8,6 +8,8 @@ const randomUser = faker.internet.displayName();
 const randomPassword = faker.internet.password();
 const testData = JSON.parse(JSON.stringify(require('../../fixtures/data.json')));
 
+let timeStart, timeFinish;
+
 Given("I am on the login page", () => {
   loginPage.gotoBaseUrl();
 });
@@ -29,6 +31,10 @@ When("I login with credentials", (table) =>  {
   } else if (credentials == "problem") {
     loginPage.getLogin().type(`${testData.user.problem}`);
     loginPage.getPassword().type(`${testData.user.password}`);
+  } else if (credentials == "glitch") {
+    loginPage.getLogin().type(`${testData.user.glitch}`);
+    loginPage.getPassword().type(`${testData.user.password}`);
+    timeStart = Date.now();
   }
   loginPage.clickSignInButton();
 });
@@ -50,4 +56,9 @@ Then(`I should see error message`, (table)=> {
 
 And("I should take a screenshot", () => {
   page.takeScreenshot();
+});
+
+And("I should record time taken to login", () => {
+  timeFinish = Date.now();
+  page.printLog(`Time taken to login: ${((timeFinish - timeStart)/1000).toFixed(2)} seconds`);
 });

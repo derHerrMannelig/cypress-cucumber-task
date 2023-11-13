@@ -14,6 +14,9 @@ class Page {
   takeScreenshot() {
     cy.screenshot({overwrite: true});
   }
+  printLog(string) {
+    cy.log(string);
+  }
 }
 
 module.exports = new Page();
