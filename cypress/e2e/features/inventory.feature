@@ -27,3 +27,8 @@ Feature: Inventory
     Then I should be redirected into corresponding webpage
       | webpage   |
       | saucelabs |
+
+  Scenario: Footer links
+
+    When I click on the footer links
+    Then I should open corresponding social networks in new tabs
