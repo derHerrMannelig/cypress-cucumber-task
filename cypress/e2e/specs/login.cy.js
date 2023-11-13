@@ -39,6 +39,10 @@ When("I login with credentials", (table) =>  {
   loginPage.clickSignInButton();
 });
 
+When("I paste inventory's url into address bar and hit enter on keyboard", () => {
+  loginPage.gotoInventoryUrl();
+});
+
 Then("I should be redirected into inventory page", () => {
   page.currentUrl().should('eq', `${baseUrl}/inventory.html`);
 });
@@ -51,6 +55,8 @@ Then(`I should see error message`, (table)=> {
     loginPage.getError().should('have.text', 'Epic sadface: Username and password do not match any user in this service');
   } else if (error == "required") {
     loginPage.getError().should('have.text', 'Epic sadface: Username is required');
+  } else if (error == "forbidden") {
+    loginPage.getError().should('have.text', "Epic sadface: You can only access '/inventory.html' when you are logged in.");
   }
 });
 

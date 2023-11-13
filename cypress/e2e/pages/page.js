@@ -3,7 +3,7 @@ class Page {
     return cy.url();
   }
   openUrl(url) {
-    cy.visit(url == undefined ? '' : url);
+    cy.visit(url == undefined ? '' : url, {failOnStatusCode: false});
   }
   getElement(element) {
     return cy.get(element);

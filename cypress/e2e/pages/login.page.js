@@ -9,6 +9,9 @@ class LoginPage {
   gotoBaseUrl() {
     page.openUrl();
   }
+  gotoInventoryUrl() {
+    page.openUrl('https://www.saucedemo.com/inventory.html');
+  }
   getLogin() {
     return page.getElement(login);
   }

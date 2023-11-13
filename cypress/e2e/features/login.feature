@@ -52,3 +52,10 @@ Feature: Login
       | glitch      |
     Then I should be redirected into inventory page
     And I should record time taken to login
+
+  Scenario: Secure area
+
+    When I paste inventory's url into address bar and hit enter on keyboard
+    Then I should see error message
+      | error       |
+      | forbidden   |
