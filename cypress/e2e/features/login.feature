@@ -10,6 +10,15 @@ Feature: Login
       | valid       |
     Then I should be redirected into inventory page
 
+  Scenario: Login w/o credentials
+
+    When I login with credentials
+      | credentials |
+      | none        |
+    Then I should see error message
+      | error       |
+      | required    |
+
   Scenario: Locked login
 
     When I login with credentials
@@ -27,3 +36,11 @@ Feature: Login
     Then I should see error message
       | error       |
       | nonexistent |
+
+  Scenario: Problem login
+
+    When I login with credentials
+      | credentials |
+      | problem     |
+    Then I should be redirected into inventory page
+    And I should take a screenshot

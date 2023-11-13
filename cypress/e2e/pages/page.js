@@ -11,6 +11,9 @@ class Page {
   clickElement(element) {
     cy.get(element).click();
   }
+  takeScreenshot() {
+    cy.screenshot({overwrite: true});
+  }
 }
 
 module.exports = new Page();

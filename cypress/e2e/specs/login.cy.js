@@ -1,4 +1,4 @@
-import { Given, When, Then } from "cypress-cucumber-preprocessor/steps";
+import { Given, When, Then, And } from "cypress-cucumber-preprocessor/steps";
 import page from '../pages/page.js';
 import loginPage from '../pages/login.page.js';
 
@@ -23,6 +23,12 @@ When("I login with credentials", (table) =>  {
   } else if (credentials == "random") {
     loginPage.getLogin().type(`${randomUser}`);
     loginPage.getPassword().type(`${randomPassword}`);
+  } else if (credentials == "none") {
+    loginPage.getLogin().clear();
+    loginPage.getPassword().clear();
+  } else if (credentials == "problem") {
+    loginPage.getLogin().type(`${testData.user.problem}`);
+    loginPage.getPassword().type(`${testData.user.password}`);
   }
   loginPage.clickSignInButton();
 });
@@ -37,5 +43,11 @@ Then(`I should see error message`, (table)=> {
     loginPage.getError().should('have.text', 'Epic sadface: Sorry, this user has been locked out.');
   } else if (error == "nonexistent") {
     loginPage.getError().should('have.text', 'Epic sadface: Username and password do not match any user in this service');
+  } else if (error == "required") {
+    loginPage.getError().should('have.text', 'Epic sadface: Username is required');
   }
+});
+
+And("I should take a screenshot", () => {
+  page.takeScreenshot();
 });
