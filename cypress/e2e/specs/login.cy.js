@@ -35,6 +35,8 @@ When("I login with credentials", (table) =>  {
     loginPage.getLogin().type(`${testData.user.glitch}`);
     loginPage.getPassword().type(`${testData.user.password}`);
     timeStart = Date.now();
+  } else if (credentials == "only login") {
+    loginPage.getLogin().type(`${testData.user.valid}`);
   }
   loginPage.clickSignInButton();
 });
@@ -57,6 +59,8 @@ Then(`I should see error message`, (table)=> {
     loginPage.getError().should('have.text', 'Epic sadface: Username is required');
   } else if (error == "forbidden") {
     loginPage.getError().should('have.text', "Epic sadface: You can only access '/inventory.html' when you are logged in.");
+  } else if (error == "password") {
+    loginPage.getError().should('have.text', 'Epic sadface: Password is required');
   }
 });
 

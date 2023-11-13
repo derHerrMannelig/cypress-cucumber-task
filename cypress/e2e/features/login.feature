@@ -19,6 +19,15 @@ Feature: Login
       | error       |
       | required    |
 
+  Scenario: Login w/o password
+
+    When I login with credentials
+      | credentials |
+      | only login  |
+    Then I should see error message
+      | error       |
+      | password    |
+
   Scenario: Locked login
 
     When I login with credentials
