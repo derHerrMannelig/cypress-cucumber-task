@@ -21,3 +21,10 @@ Feature: Cart
     And I should see initial cart item's status
       | status  |
       | empty   |
+
+  Scenario: Checkout
+
+    When I click on the Checkout button
+    And I submit random checkout data
+    And I click on the Finish button
+    Then I should be redirected into complete checkout page

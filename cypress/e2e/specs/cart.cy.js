@@ -5,6 +5,10 @@ import inventoryPage from '../pages/inventory.page.js';
 import cartPage from '../pages/cart.page.js';
 
 const baseUrl = Cypress.config().baseUrl;
+const { faker } = require('@faker-js/faker');
+const randomFirstName = faker.person.firstName();
+const randomLastName = faker.person.lastName();
+const randomPostalCode = faker.location.zipCode();
 const testData = JSON.parse(JSON.stringify(require('../../fixtures/data.json')));
 
 let itemTitle, i;
@@ -41,13 +45,33 @@ When("I click on the Continue Shopping button", () => {
   cartPage.clickContinueShoppingButton();
 });
 
+When("I click on the Checkout button", () => {
+  cartPage.clickCheckoutButton();
+});
+
 And("I click on the All Items button in burger menu", () => {
   inventoryPage.clickBurgerButton();
   inventoryPage.clickAllItemsButton();
 });
 
+And("I submit random checkout data", () => {
+  cartPage.getFirstName().type(`${randomFirstName}`);
+  cartPage.getLastName().type(`${randomLastName}`);
+  cartPage.getPostalCode().type(`${randomPostalCode}`);
+  cartPage.clickContinueButton()
+});
+
+And("I click on the Finish button", () => {
+  cartPage.getItemTitle().should('have.text', `${itemTitle}`);
+  cartPage.clickFinishButton()
+});
+
 Then("I should be redirected into inventory page", () => {
   page.currentUrl().should('eq', `${baseUrl}/inventory.html`);
+});
+
+Then("I should be redirected into complete checkout page", () => {
+  page.currentUrl().should('eq', `${baseUrl}/checkout-complete.html`);
 });
 
 And("I should see initial cart item's status", (table) => {
