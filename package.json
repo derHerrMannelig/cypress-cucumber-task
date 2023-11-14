@@ -6,7 +6,9 @@
   },
   "scripts": {
     "cypress:headless": "cypress run",
-    "cypress:open": "cypress open"
+    "cypress:open": "cypress open",
+    "cypress:headless:m": "cypress run --config-file mobile.config.js",
+    "cypress:open:m": "cypress open --config-file mobile.config.js"
   },
   "cypress-cucumber-preprocessor": {
     "nonGlobalStepDefinitions": false,
