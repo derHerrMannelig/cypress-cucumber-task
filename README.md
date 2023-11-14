@@ -4,6 +4,7 @@ This is repository for Cypress framework + Cucumber preprocessor task.
 **Note: this is main branch.**  
 [Tested website](https://www.saucedemo.com/)  
 [Test cases list](https://docs.google.com/spreadsheets/d/1Q-W8j-h47H-rrqa_HreKcOJXFKD7zIOVN2F-k8EzqfA/edit?usp=sharing)  
+[Report from latest pipeline run](https://derherrmannelig.github.io/cypress-cucumber-task/html/)  
 ## Requirements
 [Node LTS](https://nodejs.org/) (18.14.2 or higher)  
 ## Installation
